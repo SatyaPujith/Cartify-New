@@ -1,0 +1,8 @@
+[functions.serpapi-proxy]
+verify_jwt = false
+
+[functions.ai-agent]
+verify_jwt = false
+
+[functions.razorpay-checkout]
+verify_jwt = false
