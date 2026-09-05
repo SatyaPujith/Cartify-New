@@ -7,7 +7,7 @@
 
 Cartify is a modern, AI-powered e-commerce platform that revolutionizes online shopping through intelligent product discovery, natural language queries, and seamless payment processing. Built with React, TypeScript, and powered by real-time product search APIs.
 
-![Cartify Demo](https://via.placeholder.com/800x400/131921/FFFFFF?text=Cartify+-+AI+Shopping+Experience)
+
 
 ## ✨ Features
 
@@ -347,11 +347,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Lucide** for beautiful icons
 - **Tailwind CSS** for styling system
 
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/cartify/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/cartify/discussions)
-- **Email**: support@cartify.com
 
 ## 🔮 Roadmap
 
@@ -364,6 +359,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ by the Cartify Team**
 
 *Revolutionizing e-commerce through AI-powered shopping experiences.*
