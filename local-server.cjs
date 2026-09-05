@@ -7,9 +7,6 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.LOCAL_API_PORT || 3001;
 
-// Gemini AI configuration
-const GEMINI_API_KEY = 'AIzaSyAb8RN6Ksch0qZFJnPiZwNYniUrNNIq4d6Zf60xkyrJCn0TfURg';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
 app.use(cors());
 app.use(express.json());
@@ -245,6 +242,144 @@ app.post('/api/razorpay-checkout/verify-payment', async (req, res) => {
   }
 });
 
+// SerpAPI Proxy Endpoint
+app.post('/api/serpapi-proxy', async (req, res) => {
+  try {
+    const { query, num = 10 } = req.body;
+
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({ error: 'Query is required' });
+    }
+
+    const serpApiKey = process.env.SERPAPI_KEY || process.env.SERP_API_KEY;
+
+    // If no SerpAPI key configured, return placeholder products
+    if (!serpApiKey) {
+      const mockProducts = generateMockProductsForQuery(query, num);
+      return res.json({
+        products: mockProducts,
+        source: 'placeholder',
+        query,
+        message: 'SerpAPI key not configured — showing curated placeholder results',
+      });
+    }
+
+    // Call SerpAPI Google Shopping endpoint
+    const params = new URLSearchParams({
+      engine: 'google_shopping',
+      q: query,
+      num: String(num),
+      gl: 'in',
+      hl: 'en',
+      api_key: serpApiKey,
+    });
+
+    const serpResponse = await fetch(
+      `https://serpapi.com/search.json?${params.toString()}`
+    );
+
+    if (!serpResponse.ok) {
+      const errorText = await serpResponse.text();
+      console.error('SerpAPI error:', errorText);
+      
+      // Fallback to placeholder products on error
+      const mockProducts = generateMockProductsForQuery(query, num);
+      return res.json({
+        products: mockProducts,
+        source: 'placeholder',
+        query,
+        message: 'SerpAPI request failed — showing placeholder results',
+      });
+    }
+
+    const serpData = await serpResponse.json();
+    const shoppingResults = serpData.shopping_results || [];
+
+    const products = shoppingResults
+      .filter(item => item.title && (item.extracted_price > 0 || item.price > 0))
+      .map((item, index) => ({
+        id: `serp_${index}_${Date.now()}`,
+        title: item.title.substring(0, 100),
+        price: item.extracted_price || item.price || 0,
+        originalPrice: item.extracted_price ? Math.round((item.extracted_price || item.price) * 1.2) : undefined,
+        rating: item.rating || (4.0 + Math.random() * 1.0),
+        reviewCount: item.reviews || Math.floor(Math.random() * 3000) + 200,
+        image: item.thumbnail || item.image || getUniqueImage(item.title, Date.now()),
+        link: item.link,
+        source: item.source || 'Google Shopping',
+        delivery: item.delivery,
+        category: categorizeProduct(item.title),
+        brand: extractBrand(item.title),
+        prime: Math.random() > 0.3,
+        inStock: true,
+      }));
+
+    res.json({
+      products,
+      source: 'serpapi',
+      query,
+    });
+  } catch (err) {
+    console.error('SerpAPI proxy error:', err);
+    
+    // Fallback to placeholder products
+    const mockProducts = generateMockProductsForQuery(req.body.query || 'products', req.body.num || 10);
+    res.json({
+      products: mockProducts,
+      source: 'placeholder',
+      query: req.body.query || 'products',
+      message: 'SerpAPI proxy error — showing placeholder results',
+    });
+  }
+});
+
+function generateMockProductsForQuery(query, num) {
+  const lowerQuery = query.toLowerCase();
+
+  const recipeMap = {
+    biryani: [
+      { name: "Fresh Basmati Rice 1kg Premium Long Grain", price: 150, image: "https://images.unsplash.com/photo-1586201375761-8416509e8f5e?w=400&h=400&fit=crop&auto=format" },
+      { name: "MDH Biryani Masala 100g Authentic Spice Mix", price: 85, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=400&fit=crop&auto=format" },
+      { name: "Fortune Sunlite Refined Oil 1L Cooking Oil", price: 180, image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&h=400&fit=crop&auto=format" },
+      { name: "Fresh Onions 1kg Premium Quality", price: 40, image: "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?w=400&h=400&fit=crop&auto=format" },
+      { name: "Everest Garam Masala Powder 50g Fresh Ground", price: 35, image: "https://images.unsplash.com/photo-1599909635549-8f5c1e3e1d2e?w=400&h=400&fit=crop&auto=format" },
+      { name: "Fresh Ginger Garlic Paste 200g", price: 45, image: "https://images.unsplash.com/photo-1617181688486-a9ec2b14e4ee?w=400&h=400&fit=crop&auto=format" },
+      { name: "Amul Ghee 200ml Pure Clarified Butter", price: 120, image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=400&h=400&fit=crop&auto=format" },
+      { name: "Premium Saffron 1g Pack Authentic Kashmir", price: 95, image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=400&fit=crop&auto=format" },
+    ],
+    gift: [
+      { name: "Nestle KitKat Dessert Delight Chocolate Gift Pack (Pack of 10)", price: 399, image: "https://images.unsplash.com/photo-1548901671-317b4f4a5e3f?w=400&h=400&fit=crop&auto=format" },
+      { name: "Ferrero Rocher Premium Chocolate Box 24 Pieces", price: 699, image: "https://images.unsplash.com/photo-1511381939415-e440483039b4?w=400&h=400&fit=crop&auto=format" },
+      { name: "Amazon Echo Dot 5th Gen Smart Speaker", price: 3499, image: "https://images.unsplash.com/photo-1543512214-318c7505f352?w=400&h=400&fit=crop&auto=format" },
+      { name: "boAt Airdopes 141 Wireless Earbuds", price: 1199, image: "https://images.unsplash.com/photo-1590646877753-0d1e3e6f1d2e?w=400&h=400&fit=crop&auto=format" },
+      { name: "Kindle Paperwhite 16GB", price: 14999, image: "https://images.unsplash.com/photo-1590682682525-670b4d3e1d0e?w=400&h=400&fit=crop&auto=format" },
+      { name: "Festive Scented Candle Gift Set (4 Pack)", price: 599, image: "https://images.unsplash.com/photo-1602874801006-2e2b9e4f5c1a?w=400&h=400&fit=crop&auto=format" },
+    ],
+  };
+
+  let baseProducts = recipeMap.biryani;
+  if (lowerQuery.includes('gift') || lowerQuery.includes('present')) {
+    baseProducts = recipeMap.gift;
+  } else if (lowerQuery.includes('biryani') || lowerQuery.includes('rice')) {
+    baseProducts = recipeMap.biryani;
+  }
+
+  return baseProducts.slice(0, num).map((p, i) => ({
+    id: `mock_${i}_${Date.now()}`,
+    title: p.name,
+    price: p.price,
+    originalPrice: Math.round(p.price * 1.2),
+    rating: 4.3 + Math.random() * 0.5,
+    reviewCount: Math.floor(Math.random() * 5000) + 500,
+    image: p.image,
+    category: lowerQuery.includes('gift') ? 'Gifts' : 'Grocery',
+    brand: p.name.split(' ')[0],
+    prime: true,
+    inStock: true,
+    source: 'placeholder',
+  }));
+}
+
 // AI Agent Endpoint
 app.post('/api/ai-agent', async (req, res) => {
   try {
@@ -257,38 +392,51 @@ app.post('/api/ai-agent', async (req, res) => {
     // Parse the natural language intent
     const intent = parseIntent(prompt);
 
-    // Get Gemini AI recommendations for better product selection
-    const geminiRecommendations = await getGeminiRecommendations(prompt, intent.budget);
-
     let products = [];
     
-    if (geminiRecommendations && geminiRecommendations.items) {
-      // Use Gemini recommendations to create realistic products
-      products = geminiRecommendations.items.map((item, index) => {
-        const uniqueId = `gemini_${index}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
-        
-        return {
-          id: uniqueId,
-          title: item.name,
-          price: item.estimatedPrice || Math.floor(Math.random() * 200) + 50,
-          originalPrice: item.estimatedPrice ? Math.round(item.estimatedPrice * 1.2) : null,
-          rating: 4.0 + Math.random() * 1.0,
-          reviewCount: Math.floor(Math.random() * 3000) + 200,
-          image: getUniqueImage(item.name, Date.now()),
-          category: item.category || categorizeProduct(item.name),
-          brand: extractBrand(item.name),
-          prime: Math.random() > 0.2,
-          inStock: true,
-          source: 'gemini-ai',
-          priority: item.priority || index + 1
-        };
+    // Use SerpAPI to search for real products based on user queries
+    const searchQuery = buildSearchQuery(intent);
+    
+    try {
+      const serpResponse = await fetch('http://localhost:3000/api/serpapi-proxy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          query: searchQuery, 
+          num: intent.maxItems || 12 
+        }),
       });
-      
-      // Sort by priority (lower number = higher priority)
-      products.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+
+      if (serpResponse.ok) {
+        const serpData = await serpResponse.json();
+        const serpProducts = serpData.products || [];
+        
+        // Transform SerpAPI results to our product format
+        products = serpProducts.map((item, index) => {
+          const uniqueId = `serp_${index}_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`;
+          
+          return {
+            id: uniqueId,
+            title: item.title || 'Unknown Product',
+            price: Math.round(item.price) || Math.floor(Math.random() * 200) + 50,
+            originalPrice: item.price ? Math.round(item.price * 1.2) : null,
+            rating: item.rating || (4.0 + Math.random() * 1.0),
+            reviewCount: item.reviewCount || Math.floor(Math.random() * 3000) + 200,
+            image: item.image || getUniqueImage(item.title || 'product', Date.now()),
+            category: item.category || categorizeProduct(item.title || ''),
+            brand: item.brand || extractBrand(item.title || ''),
+            prime: Math.random() > 0.2,
+            inStock: true,
+            source: 'serpapi',
+            link: item.link
+          };
+        });
+      }
+    } catch (error) {
+      console.error('SerpAPI error:', error);
     }
     
-    // If no Gemini recommendations or fallback needed, use existing logic
+    // If SerpAPI fails or returns no results, use placeholder products
     if (products.length === 0) {
       if (intent.action === 'recipe' || intent.recipe) {
         products = generatePlaceholderProducts(intent);
@@ -313,16 +461,8 @@ app.post('/api/ai-agent', async (req, res) => {
     // Calculate total
     const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
 
-    // Generate explanation with Gemini reasoning if available
-    let explanation = '';
-    if (geminiRecommendations && geminiRecommendations.reasoning) {
-      explanation = `${geminiRecommendations.reasoning}. Found ${selectedProducts.length} items totaling ₹${total}`;
-      if (intent.budget) {
-        explanation += ` within your ₹${intent.budget} budget (₹${intent.budget - total} remaining)`;
-      }
-    } else {
-      explanation = generateExplanation(intent, selectedProducts, total);
-    }
+    // Generate explanation
+    const explanation = generateExplanation(intent, selectedProducts, total);
 
     res.json({
       intent,
@@ -332,7 +472,7 @@ app.post('/api/ai-agent', async (req, res) => {
       budget: intent.budget,
       withinBudget: intent.budget ? total <= intent.budget : true,
       explanation,
-      geminiUsed: !!geminiRecommendations,
+      source: products.length > 0 && products[0].source === 'serpapi' ? 'serpapi' : 'placeholder',
     });
   } catch (err) {
     res.status(500).json({ error: err.message || 'Internal server error' });
@@ -393,60 +533,7 @@ function parseIntent(prompt) {
   return { action, keywords, budget, category, recipient, occasion, recipe, maxItems };
 }
 
-// Gemini AI helper function
-async function getGeminiRecommendations(prompt, budget) {
-  try {
-    const geminiPrompt = `You are a smart shopping assistant. For the request: "${prompt}" with budget ₹${budget || 'unlimited'}, provide a JSON list of 8-12 essential items needed.
 
-For biryani ingredients under ₹500, include: rice, biryani masala, oil, onions, meat/vegetables, yogurt, etc. with realistic Indian prices.
-For other requests, provide relevant items with realistic prices.
-
-Respond ONLY with valid JSON in this format:
-{
-  "items": [
-    {"name": "Basmati Rice 1kg", "category": "grocery", "estimatedPrice": 150, "priority": 1},
-    {"name": "Biryani Masala 50g", "category": "spice", "estimatedPrice": 85, "priority": 2}
-  ],
-  "totalEstimate": 235,
-  "reasoning": "Essential items for biryani within budget"
-}`;
-
-    const response = await fetch(GEMINI_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-goog-api-key': GEMINI_API_KEY,
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: geminiPrompt
-          }]
-        }]
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`Gemini API error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    const geminiText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
-    if (geminiText) {
-      // Extract JSON from response
-      const jsonMatch = geminiText.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        return JSON.parse(jsonMatch[0]);
-      }
-    }
-    
-    return null;
-  } catch (error) {
-    console.error('Gemini AI error:', error);
-    return null;
-  }
-}
 function isValidImageUrl(url) {
   if (!url || typeof url !== 'string' || url.length < 10) {
     return false;
