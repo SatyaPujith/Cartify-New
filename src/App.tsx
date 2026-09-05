@@ -17,7 +17,7 @@ function App() {
     <ProductProvider>
       <CartProvider>
         <BrowserRouter>
-          <div className="min-h-screen bg-amazon-background flex flex-col">
+          <div className="min-h-screen bg-cartify-background flex flex-col">
             <Header />
             <main className="flex-1">
               <Routes>

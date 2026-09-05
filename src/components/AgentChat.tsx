@@ -223,10 +223,10 @@ export default function AgentChat() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-50 bg-amazon-navy hover:bg-amazon-navy-hover text-white rounded-full p-4 shadow-2xl transition-all hover:scale-105 group"
+          className="fixed bottom-6 right-6 z-50 bg-cartify-navy hover:bg-cartify-navy-hover text-white rounded-full p-4 shadow-2xl transition-all hover:scale-105 group"
         >
-          <Sparkles className="w-6 h-6 text-amazon-orange" />
-          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-amazon-navy text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <Sparkles className="w-6 h-6 text-cartify-orange" />
+          <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-cartify-navy text-white text-sm px-3 py-2 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
             Ask AI Agent
           </span>
         </button>
@@ -236,9 +236,9 @@ export default function AgentChat() {
       {isOpen && (
         <div className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[440px] h-full sm:h-[600px] sm:max-h-[80vh] bg-white sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-200">
           {/* Header */}
-          <div className="bg-amazon-navy text-white px-4 py-3 flex items-center justify-between shrink-0">
+          <div className="bg-cartify-navy text-white px-4 py-3 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2">
-              <div className="bg-amazon-orange rounded-full p-1.5">
+              <div className="bg-cartify-orange rounded-full p-1.5">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
               <div>
@@ -246,7 +246,7 @@ export default function AgentChat() {
                 <p className="text-xs text-gray-400">Powered by Agentic Commerce</p>
               </div>
               {stage !== 'idle' && (
-                <span className="ml-2 text-xs bg-amazon-navy-hover px-2 py-0.5 rounded-full">
+                <span className="ml-2 text-xs bg-cartify-navy-hover px-2 py-0.5 rounded-full">
                   {stage === 'results' && 'Products found'}
                   {stage === 'in_cart' && 'In cart'}
                   {stage === 'confirming' && 'Confirming'}
@@ -258,7 +258,7 @@ export default function AgentChat() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 hover:bg-amazon-navy-hover rounded-full transition-colors"
+              className="p-1.5 hover:bg-cartify-navy-hover rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -274,7 +274,7 @@ export default function AgentChat() {
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                     msg.role === 'user'
-                      ? 'bg-amazon-navy text-white'
+                      ? 'bg-cartify-navy text-white'
                       : 'bg-white border border-gray-200 text-gray-800'
                   }`}
                 >
@@ -338,7 +338,7 @@ export default function AgentChat() {
             {loading && (
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin text-amazon-orange" />
+                  <Loader2 className="w-4 h-4 animate-spin text-cartify-orange" />
                   <span className="text-sm text-gray-600">Searching products...</span>
                 </div>
               </div>
@@ -347,7 +347,7 @@ export default function AgentChat() {
             {stage === 'paying' && (
               <div className="flex justify-start">
                 <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin text-amazon-orange" />
+                  <Loader2 className="w-4 h-4 animate-spin text-cartify-orange" />
                   <span className="text-sm text-gray-600">Processing payment...</span>
                 </div>
               </div>
@@ -363,7 +363,7 @@ export default function AgentChat() {
               <div className="px-4 py-2 space-y-2">
                 <button
                   onClick={handleAddToCart}
-                  className="w-full bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   Add {lastAgentResponse.products.length} items to cart — {formatPrice(lastAgentResponse.total)}
@@ -390,7 +390,7 @@ export default function AgentChat() {
               <div className="px-4 py-2 space-y-2">
                 <button
                   onClick={handleProceedToPayment}
-                  className="w-full bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <CreditCard className="w-4 h-4" />
                   Proceed to Payment — {formatPrice(totalAmount)}
@@ -416,7 +416,7 @@ export default function AgentChat() {
                 </div>
                 <button
                   onClick={handleConfirmPayment}
-                  className="w-full bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <Lock className="w-4 h-4" />
                   Confirm & Pay {formatPrice(totalAmount)}
@@ -439,7 +439,7 @@ export default function AgentChat() {
                 </div>
                 <button
                   onClick={handleStartOver}
-                  className="w-full bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
                   Shop for something else
@@ -463,7 +463,7 @@ export default function AgentChat() {
                 </div>
                 <button
                   onClick={handleProceedToPayment}
-                  className="w-full bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2.5 rounded-full text-sm transition-colors flex items-center justify-center gap-2"
                 >
                   <CreditCard className="w-4 h-4" />
                   Try Again
@@ -509,13 +509,13 @@ export default function AgentChat() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Tell me what you need..."
-                  className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-amazon-orange"
+                  className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-cartify-orange"
                   disabled={loading || stage === 'paying'}
                 />
                 <button
                   type="submit"
                   disabled={loading || !input.trim() || stage === 'paying'}
-                  className="bg-amazon-orange hover:bg-amazon-orange-hover text-white p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-cartify-orange hover:bg-cartify-orange-hover text-white p-2 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="w-4 h-4" />
                 </button>

@@ -350,7 +350,7 @@ function generateMockProductsForQuery(query, num) {
     gift: [
       { name: "Nestle KitKat Dessert Delight Chocolate Gift Pack (Pack of 10)", price: 399, image: "https://images.unsplash.com/photo-1548901671-317b4f4a5e3f?w=400&h=400&fit=crop&auto=format" },
       { name: "Ferrero Rocher Premium Chocolate Box 24 Pieces", price: 699, image: "https://images.unsplash.com/photo-1511381939415-e440483039b4?w=400&h=400&fit=crop&auto=format" },
-      { name: "Amazon Echo Dot 5th Gen Smart Speaker", price: 3499, image: "https://images.unsplash.com/photo-1543512214-318c7505f352?w=400&h=400&fit=crop&auto=format" },
+      { name: "Cartify Echo Dot 5th Gen Smart Speaker", price: 3499, image: "https://images.unsplash.com/photo-1543512214-318c7505f352?w=400&h=400&fit=crop&auto=format" },
       { name: "boAt Airdopes 141 Wireless Earbuds", price: 1199, image: "https://images.unsplash.com/photo-1590646877753-0d1e3e6f1d2e?w=400&h=400&fit=crop&auto=format" },
       { name: "Kindle Paperwhite 16GB", price: 14999, image: "https://images.unsplash.com/photo-1590682682525-670b4d3e1d0e?w=400&h=400&fit=crop&auto=format" },
       { name: "Festive Scented Candle Gift Set (4 Pack)", price: 599, image: "https://images.unsplash.com/photo-1602874801006-2e2b9e4f5c1a?w=400&h=400&fit=crop&auto=format" },
@@ -398,7 +398,7 @@ app.post('/api/ai-agent', async (req, res) => {
     const searchQuery = buildSearchQuery(intent);
     
     try {
-      const serpResponse = await fetch('http://localhost:3000/api/serpapi-proxy', {
+      const serpResponse = await fetch('http://localhost:3001/api/serpapi-proxy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -924,7 +924,7 @@ function getFallbackImage(title, index) {
 
 // Helper function to extract brand from title
 function extractBrand(title) {
-  const commonBrands = ['Samsung', 'Apple', 'Xiaomi', 'OnePlus', 'Realme', 'Oppo', 'Vivo', 'Sony', 'LG', 'Panasonic', 'Philips', 'Boat', 'JBL', 'Nike', 'Adidas', 'Puma', 'Reebok', 'Nestle', 'Cadbury', 'Amul', 'Tata', 'Parle', 'Britannia', 'ITC', 'HUL', 'P&G', 'Dabur', 'Patanjali', 'Marico', 'Emami', 'Godrej', 'Bajaj', 'Havells', 'Orient', 'Crompton', 'Usha', 'Prestige', 'Hawkins', 'Milton', 'Cello', 'Tupperware', 'Asian Paints', 'Berger', 'Dulux', 'Nerolac', 'Shalimar'];
+  const commonBrands = ['Samsung', 'Apple', 'Xiaomi', 'OnePlus', 'Realme', 'Oppo', 'Vivo', 'Sony', 'LG', 'Panasonic', 'Philips', 'Boat', 'JBL', 'Nike', 'Adidas', 'Puma', 'Reebok', 'Nestle', 'Cadbury', 'Amul', 'Tata', 'Parle', 'Britannia', 'ITC', 'HUL', 'P&G', 'Dabur', 'Patanjali', 'Marico', 'Emami', 'Godrej', 'Bajaj', 'Havells', 'Orient', 'Crompton', 'Usha', 'Prestige', 'Hawkins', 'Milton', 'Cello', 'Tupperware', 'Asian Paints', 'Berger', 'Dulux', 'Nerolac', 'Shalimar', 'Cartify'];
   
   for (const brand of commonBrands) {
     if (title.toLowerCase().includes(brand.toLowerCase())) {
@@ -1132,7 +1132,7 @@ function generateMockProducts(query, num) {
       { name: 'Nestle KitKat Dessert Delight Chocolate Gift Pack', price: 399, category: 'Gifts', brand: 'Nestle' },
       { name: 'Ferrero Rocher Premium Chocolate Box 24 Pieces', price: 699, category: 'Gifts', brand: 'Ferrero' },
       { name: 'boAt Airdopes 141 Wireless Earbuds Gift Pack', price: 1199, category: 'Electronics', brand: 'boAt' },
-      { name: 'Amazon Echo Dot 5th Gen Smart Speaker', price: 3499, category: 'Electronics', brand: 'Amazon' },
+      { name: 'Cartify Echo Dot 5th Gen Smart Speaker', price: 3499, category: 'Electronics', brand: 'Cartify' },
       { name: 'Festive Scented Candle Gift Set 4 Pack', price: 599, category: 'Gifts', brand: 'Festive' },
       { name: 'Premium Leather Wallet for Men Brown', price: 799, category: 'Fashion', brand: 'Urban' }
     ];
@@ -1202,7 +1202,7 @@ function generatePlaceholderProducts(intent) {
       { id: `mock_0_${now}`, title: 'Nestle KitKat Dessert Delight Gift Pack (10 pieces)', price: 399, rating: 4.6, reviewCount: 1820, image: getUniqueImage('chocolate gift', sessionId), category: 'Gifts', brand: 'Nestle', inStock: true, source: 'placeholder' },
       { id: `mock_1_${now}`, title: 'Ferrero Rocher Premium Chocolate Box 24 Pieces', price: 699, rating: 4.7, reviewCount: 3200, image: getUniqueImage('ferrero rocher', sessionId), category: 'Gifts', brand: 'Ferrero', inStock: true, source: 'placeholder' },
       { id: `mock_2_${now}`, title: 'boAt Wireless Earbuds with 42H Playtime', price: 1199, rating: 4.1, reviewCount: 89231, image: getUniqueImage('wireless earbuds', sessionId), category: 'Electronics', brand: 'boAt', inStock: true, source: 'placeholder' },
-      { id: `mock_3_${now}`, title: 'Amazon Echo Dot 5th Gen Smart Speaker', price: 3499, rating: 4.5, reviewCount: 15672, image: getUniqueImage('smart speaker', sessionId), category: 'Electronics', brand: 'Amazon', inStock: true, source: 'placeholder' },
+      { id: `mock_3_${now}`, title: 'Cartify Echo Dot 5th Gen Smart Speaker', price: 3499, rating: 4.5, reviewCount: 15672, image: getUniqueImage('smart speaker', sessionId), category: 'Electronics', brand: ' ', inStock: true, source: 'placeholder' },
       { id: `mock_4_${now}`, title: 'Festive Scented Candle Gift Set (4 Pack)', price: 599, rating: 4.4, reviewCount: 2100, image: getUniqueImage('scented candles', sessionId), category: 'Gifts', brand: 'Festive', inStock: true, source: 'placeholder' },
       { id: `mock_5_${now}`, title: 'Premium Leather Wallet for Men - Brown', price: 799, rating: 4.3, reviewCount: 3400, image: getUniqueImage('leather wallet', sessionId), category: 'Fashion', brand: 'Urban', inStock: true, source: 'placeholder' },
     ];

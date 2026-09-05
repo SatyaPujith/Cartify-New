@@ -15,7 +15,7 @@ export default function HomePage() {
     <div>
       <HeroBanner />
 
-      <div className="max-w-amazon mx-auto px-2 sm:px-4 -mt-8 relative z-10">
+      <div className="max-w-cartify mx-auto px-2 sm:px-4 -mt-8 relative z-10">
         <CategoryGrid />
 
         {deals.length > 0 && <ProductRow title="Today's Deals" products={deals} seeMoreLink="/deals" />}

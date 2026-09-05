@@ -17,7 +17,7 @@ export default function SearchPage() {
   if (sortBy === 'rating') results = [...results].sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="max-w-amazon mx-auto px-2 sm:px-4 py-4">
+    <div className="max-w-cartify mx-auto px-2 sm:px-4 py-4">
       <div className="flex items-center justify-between mb-3">
         <p className="text-sm text-gray-600">
           {results.length > 0
@@ -30,7 +30,7 @@ export default function SearchPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-amazon-orange"
+            className="border border-gray-300 rounded px-2 py-1 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-cartify-orange"
           >
             <option value="relevance">Relevance</option>
             <option value="price-low">Price: Low to High</option>
@@ -46,7 +46,7 @@ export default function SearchPage() {
           <p className="text-gray-600 mb-4">Try searching with different keywords.</p>
           <Link
             to="/"
-            className="inline-block bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 font-bold py-2 px-6 rounded-full text-sm transition-colors"
+            className="inline-block bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 font-bold py-2 px-6 rounded-full text-sm transition-colors"
           >
             Go Home
           </Link>

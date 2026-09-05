@@ -18,13 +18,13 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   };
 
   return (
-    <header className="bg-amazon-navy text-white sticky top-0 z-50">
+    <header className="bg-cartify-navy text-white sticky top-0 z-50">
       {/* Main header row */}
       <div className="flex items-center px-2 sm:px-4 h-[60px] gap-2">
         {/* Mobile menu */}
         <button
           onClick={onMenuClick}
-          className="lg:hidden p-2 hover:bg-amazon-navy-hover rounded"
+          className="lg:hidden p-2 hover:bg-cartify-navy-hover rounded"
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -32,7 +32,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         {/* Logo */}
         <Link to="/" className="flex items-center px-2 hover:border border-transparent hover:border-white rounded shrink-0">
           <span className="text-2xl font-bold tracking-tight">
-            amazon<span className="text-amazon-orange">.</span>
+            Cartify<span className="text-cartify-orange">.</span>
           </span>
         </Link>
 
@@ -51,7 +51,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             <select
               value={searchCategory}
               onChange={(e) => setSearchCategory(e.target.value)}
-              className="h-full bg-amazon-card-header text-gray-900 text-xs border-r border-gray-300 px-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amazon-orange"
+              className="h-full bg-cartify-card-header text-gray-900 text-xs border-r border-gray-300 px-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-cartify-orange"
             >
               <option value="All">All</option>
               {categories.map((cat) => (
@@ -63,12 +63,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search Amazon.in"
-            className="flex-1 h-full px-3 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-amazon-orange text-sm"
+            placeholder="Search Cartify.in"
+            className="flex-1 h-full px-3 text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-cartify-orange text-sm"
           />
           <button
             type="submit"
-            className="bg-amazon-yellow hover:bg-amazon-yellow-hover px-4 flex items-center justify-center transition-colors"
+            className="bg-cartify-yellow hover:bg-cartify-yellow-hover px-4 flex items-center justify-center transition-colors"
           >
             <Search className="w-5 h-5 text-gray-900" />
           </button>
@@ -102,7 +102,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         >
           <div className="relative">
             <ShoppingCart className="w-8 h-8" />
-            <span className="absolute -top-1 left-4 text-amazon-orange font-bold text-sm min-w-[20px] text-center">
+            <span className="absolute -top-1 left-4 text-cartify-orange font-bold text-sm min-w-[20px] text-center">
               {cartCount}
             </span>
           </div>
@@ -111,7 +111,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
       </div>
 
       {/* Sub nav */}
-      <div className="bg-amazon-navy-light flex items-center px-2 sm:px-4 h-[39px] gap-1 text-sm overflow-x-auto whitespace-nowrap scrollbar-hide">
+      <div className="bg-cartify-navy-light flex items-center px-2 sm:px-4 h-[39px] gap-1 text-sm overflow-x-auto whitespace-nowrap scrollbar-hide">
         <button
           onClick={onMenuClick}
           className="flex items-center gap-1 px-2 py-1 hover:border border-transparent hover:border-white rounded font-bold"
@@ -128,7 +128,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             {item}
           </Link>
         ))}
-        <span className="ml-auto text-amazon-yellow font-bold hidden md:inline">
+        <span className="ml-auto text-cartify-yellow font-bold hidden md:inline">
           Shop deals in Electronics
         </span>
       </div>

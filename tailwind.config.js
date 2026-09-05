@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        amazon: {
+        cartify: {
           navy: '#131921',
           'navy-light': '#232f3e',
           'navy-hover': '#37475a',
@@ -24,10 +24,10 @@ export default {
         },
       },
       fontFamily: {
-        amazon: ['"Amazon Ember"', 'Arial', 'sans-serif'],
+        cartify: ['"Cartify Sans"', 'Arial', 'sans-serif'],
       },
       maxWidth: {
-        'amazon': '1500px',
+        'cartify': '1500px',
       },
     },
   },

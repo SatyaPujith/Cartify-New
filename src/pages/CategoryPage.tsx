@@ -12,9 +12,9 @@ export default function CategoryPage() {
     : getProductsByCategory(categoryName || '');
 
   return (
-    <div className="max-w-amazon mx-auto px-2 sm:px-4 py-4">
+    <div className="max-w-cartify mx-auto px-2 sm:px-4 py-4">
       <div className="flex items-center gap-1 text-xs text-gray-500 mb-4">
-        <Link to="/" className="hover:text-amazon-link hover:underline">Home</Link>
+        <Link to="/" className="hover:text-cartify-link hover:underline">Home</Link>
         <ChevronRight className="w-3 h-3" />
         <span className="text-gray-700">{categoryName === 'deals' ? "Today's Deals" : categoryName}</span>
       </div>

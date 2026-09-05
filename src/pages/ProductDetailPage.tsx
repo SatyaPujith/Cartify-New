@@ -15,9 +15,9 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <div className="max-w-amazon mx-auto px-4 py-20 text-center">
+      <div className="max-w-cartify mx-auto px-4 py-20 text-center">
         <h1 className="text-2xl font-bold text-gray-900">Product not found</h1>
-        <Link to="/" className="text-amazon-link hover:text-amazon-orange hover:underline mt-4 inline-block">
+        <Link to="/" className="text-cartify-link hover:text-cartify-orange hover:underline mt-4 inline-block">
           Go back to home
         </Link>
       </div>
@@ -30,12 +30,12 @@ export default function ProductDetailPage() {
     : 0;
 
   return (
-    <div className="max-w-amazon mx-auto px-2 sm:px-4 py-4">
+    <div className="max-w-cartify mx-auto px-2 sm:px-4 py-4">
       {/* Breadcrumb */}
       <div className="flex items-center gap-1 text-xs text-gray-500 mb-4">
-        <Link to="/" className="hover:text-amazon-link hover:underline">Home</Link>
+        <Link to="/" className="hover:text-cartify-link hover:underline">Home</Link>
         <ChevronRight className="w-3 h-3" />
-        <Link to={`/category/${product.category}`} className="hover:text-amazon-link hover:underline">
+        <Link to={`/category/${product.category}`} className="hover:text-cartify-link hover:underline">
           {product.category}
         </Link>
         <ChevronRight className="w-3 h-3" />
@@ -64,13 +64,13 @@ export default function ProductDetailPage() {
                   key={star}
                   className={`w-4 h-4 ${
                     star <= Math.round(product.rating)
-                      ? 'text-amazon-orange fill-amazon-orange'
+                      ? 'text-cartify-orange fill-cartify-orange'
                       : 'text-gray-300'
                   }`}
                 />
               ))}
             </div>
-            <span className="text-sm text-amazon-link hover:text-amazon-orange hover:underline cursor-pointer">
+            <span className="text-sm text-cartify-link hover:text-cartify-orange hover:underline cursor-pointer">
               {product.rating} ({product.reviewCount.toLocaleString('en-IN')} ratings)
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function ProductDetailPage() {
 
           {discount > 0 && (
             <div className="mb-2">
-              <span className="text-lg text-amazon-price font-medium">-{discount}%</span>
+              <span className="text-lg text-cartify-price font-medium">-{discount}%</span>
             </div>
           )}
           <div className="mb-1">
@@ -92,15 +92,15 @@ export default function ProductDetailPage() {
           </div>
           {product.prime && (
             <div className="text-sm text-gray-600 mt-1">
-              <span className="font-bold text-amazon-success">Prime</span> FREE delivery
+              <span className="font-bold text-cartify-success">Prime</span> FREE delivery
             </div>
           )}
 
           <hr className="my-3" />
 
           <div className="text-sm space-y-1">
-            <p><span className="text-gray-500">Brand:</span> <span className="text-amazon-link">{product.brand}</span></p>
-            <p><span className="text-gray-500">Category:</span> <span className="text-amazon-link">{product.category}</span></p>
+            <p><span className="text-gray-500">Brand:</span> <span className="text-cartify-link">{product.brand}</span></p>
+            <p><span className="text-gray-500">Category:</span> <span className="text-cartify-link">{product.category}</span></p>
           </div>
 
           <hr className="my-3" />
@@ -119,10 +119,10 @@ export default function ProductDetailPage() {
             <p className="text-2xl font-bold text-gray-900 mb-2">{formatPrice(product.price)}</p>
             {product.prime && (
               <p className="text-sm text-gray-600 mb-2">
-                <span className="font-bold text-amazon-success">Prime</span> FREE delivery
+                <span className="font-bold text-cartify-success">Prime</span> FREE delivery
               </p>
             )}
-            <p className="text-sm text-amazon-success font-medium mb-3">In Stock</p>
+            <p className="text-sm text-cartify-success font-medium mb-3">In Stock</p>
 
             <div className="flex items-center gap-2 mb-4">
               <span className="text-sm text-gray-600">Qty:</span>
@@ -145,7 +145,7 @@ export default function ProductDetailPage() {
 
             <button
               onClick={() => addToCart(product, quantity)}
-              className="w-full bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 font-bold py-2 rounded-full text-sm mb-2 transition-colors"
+              className="w-full bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 font-bold py-2 rounded-full text-sm mb-2 transition-colors"
             >
               Add to Cart
             </button>
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
                 addToCart(product, quantity);
                 navigate('/cart');
               }}
-              className="w-full bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2 rounded-full text-sm transition-colors"
+              className="w-full bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2 rounded-full text-sm transition-colors"
             >
               Buy Now
             </button>
@@ -168,7 +168,7 @@ export default function ProductDetailPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Truck className="w-4 h-4 text-gray-500" />
-                Ships from Amazon
+                Ships from Cartify
               </div>
               <div className="flex items-center gap-2">
                 <RotateCcw className="w-4 h-4 text-gray-500" />

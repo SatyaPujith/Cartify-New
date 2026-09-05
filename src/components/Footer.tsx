@@ -25,14 +25,14 @@ export default function Footer() {
       {/* Back to top */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="w-full bg-amazon-navy-hover text-white text-sm py-4 hover:bg-amazon-navy-hover/80 transition-colors"
+        className="w-full bg-cartify-navy-hover text-white text-sm py-4 hover:bg-cartify-navy-hover/80 transition-colors"
       >
         Back to top
       </button>
 
       {/* Main footer links */}
-      <div className="bg-amazon-navy-light text-white">
-        <div className="max-w-amazon mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="bg-cartify-navy-light text-white">
+        <div className="max-w-cartify mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
           {footerLinks.map((section) => (
             <div key={section.title}>
               <h3 className="font-bold text-base mb-3">{section.title}</h3>
@@ -51,10 +51,10 @@ export default function Footer() {
       </div>
 
       {/* Logo line */}
-      <div className="bg-amazon-navy-light border-t border-gray-600 py-6">
-        <div className="max-w-amazon mx-auto px-4 flex flex-col items-center gap-2">
+      <div className="bg-cartify-navy-light border-t border-gray-600 py-6">
+        <div className="max-w-cartify mx-auto px-4 flex flex-col items-center gap-2">
           <span className="text-2xl font-bold text-white">
-            amazon<span className="text-amazon-orange">.</span>
+            amazon<span className="text-cartify-orange">.</span>
           </span>
           <div className="flex gap-2">
             <button className="px-3 py-1 border border-gray-500 rounded text-xs text-gray-300 hover:border-gray-300">
@@ -71,8 +71,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom copyright */}
-      <div className="bg-amazon-navy text-gray-400 py-6">
-        <div className="max-w-amazon mx-auto px-4 text-center text-xs space-y-2">
+      <div className="bg-cartify-navy text-gray-400 py-6">
+        <div className="max-w-cartify mx-auto px-4 text-center text-xs space-y-2">
           <div className="flex justify-center flex-wrap gap-x-4 gap-y-1">
             <Link to="/" className="hover:text-white hover:underline">Conditions of Use & Sale</Link>
             <Link to="/" className="hover:text-white hover:underline">Privacy Notice</Link>

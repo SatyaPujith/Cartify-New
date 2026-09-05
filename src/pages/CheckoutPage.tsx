@@ -46,7 +46,7 @@ export default function CheckoutPage() {
           </div>
           <Link
             to="/"
-            className="inline-block bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 font-bold py-2.5 px-8 rounded-full text-sm transition-colors"
+            className="inline-block bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 font-bold py-2.5 px-8 rounded-full text-sm transition-colors"
           >
             Continue Shopping
           </Link>
@@ -58,8 +58,8 @@ export default function CheckoutPage() {
   if (items.length === 0) return null;
 
   return (
-    <div className="max-w-amazon mx-auto px-2 sm:px-4 py-4">
-      <Link to="/cart" className="inline-flex items-center gap-1 text-sm text-amazon-link hover:text-amazon-orange hover:underline mb-4">
+    <div className="max-w-cartify mx-auto px-2 sm:px-4 py-4">
+      <Link to="/cart" className="inline-flex items-center gap-1 text-sm text-cartify-link hover:text-cartify-orange hover:underline mb-4">
         <ArrowLeft className="w-4 h-4" />
         Back to Cart
       </Link>
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
         <div className="lg:col-span-8">
           {/* Confirmation gate */}
           {showConfirm && (paymentStatus === 'idle' || paymentStatus === 'cancelled') && (
-            <div className="bg-amazon-success-bg border border-green-200 rounded-lg p-5 mb-4">
+            <div className="bg-cartify-success-bg border border-green-200 rounded-lg p-5 mb-4">
               <div className="flex items-start gap-3">
                 <Shield className="w-5 h-5 text-green-700 shrink-0 mt-0.5" />
                 <div>
@@ -84,7 +84,7 @@ export default function CheckoutPage() {
                   <div className="mt-3 flex gap-2">
                     <button
                       onClick={handlePayment}
-                      className="bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2 px-6 rounded-full text-sm transition-colors flex items-center gap-2"
+                      className="bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2 px-6 rounded-full text-sm transition-colors flex items-center gap-2"
                     >
                       <Lock className="w-4 h-4" />
                       Confirm & Pay
@@ -104,7 +104,7 @@ export default function CheckoutPage() {
           {/* Processing state */}
           {paymentStatus === 'processing' && (
             <div className="bg-white border border-gray-200 rounded-lg p-8 text-center">
-              <Loader2 className="w-10 h-10 text-amazon-orange animate-spin mx-auto mb-3" />
+              <Loader2 className="w-10 h-10 text-cartify-orange animate-spin mx-auto mb-3" />
               <p className="text-sm text-gray-600">{paymentMessage}</p>
             </div>
           )}
@@ -122,7 +122,7 @@ export default function CheckoutPage() {
                       resetPayment();
                       setShowConfirm(true);
                     }}
-                    className="mt-3 bg-amazon-orange hover:bg-amazon-orange-hover text-white font-bold py-2 px-6 rounded-full text-sm transition-colors"
+                    className="mt-3 bg-cartify-orange hover:bg-cartify-orange-hover text-white font-bold py-2 px-6 rounded-full text-sm transition-colors"
                   >
                     Try Again
                   </button>

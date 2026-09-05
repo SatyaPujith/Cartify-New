@@ -39,7 +39,7 @@ export default function HeroBanner() {
               <div className="absolute bottom-10 left-8 sm:left-16 text-white">
                 <h2 className="text-2xl sm:text-4xl font-bold mb-2 drop-shadow-lg">{banner.title}</h2>
                 <p className="text-sm sm:text-lg text-gray-200 drop-shadow-lg">{banner.subtitle}</p>
-                <span className="inline-block mt-4 bg-amazon-yellow text-gray-900 px-6 py-2 rounded-md font-bold text-sm hover:bg-amazon-yellow-hover transition-colors">
+                <span className="inline-block mt-4 bg-cartify-yellow text-gray-900 px-6 py-2 rounded-md font-bold text-sm hover:bg-cartify-yellow-hover transition-colors">
                   Shop Now
                 </span>
               </div>

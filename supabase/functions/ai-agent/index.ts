@@ -251,7 +251,7 @@ function categorizeProduct(title: string): string {
 }
 
 function extractBrand(title: string): string {
-  const commonBrands = ['Samsung', 'Apple', 'Xiaomi', 'OnePlus', 'Realme', 'Oppo', 'Vivo', 'Sony', 'LG', 'Panasonic', 'Philips', 'Boat', 'JBL', 'Nike', 'Adidas', 'Puma', 'Reebok', 'Nestle', 'Cadbury', 'Amul', 'Tata', 'Parle', 'Britannia', 'ITC', 'HUL', 'P&G', 'Dabur', 'Patanjali', 'Marico', 'Emami', 'Godrej', 'Bajaj', 'Havells', 'Orient', 'Crompton', 'Usha', 'Prestige', 'Hawkins', 'Milton', 'Cello', 'Tupperware', 'Asian Paints', 'Berger', 'Dulux', 'Nerolac', 'Shalimar'];
+  const commonBrands = ['Samsung', 'Apple', 'Xiaomi', 'OnePlus', 'Realme', 'Oppo', 'Vivo', 'Sony', 'LG', 'Panasonic', 'Philips', 'Boat', 'JBL', 'Nike', 'Adidas', 'Puma', 'Reebok', 'Nestle', 'Cadbury', 'Amul', 'Tata', 'Parle', 'Britannia', 'ITC', 'HUL', 'P&G', 'Dabur', 'Patanjali', 'Marico', 'Emami', 'Godrej', 'Bajaj', 'Havells', 'Orient', 'Crompton', 'Usha', 'Prestige', 'Hawkins', 'Milton', 'Cello', 'Tupperware', 'Asian Paints', 'Berger', 'Dulux', 'Nerolac', 'Shalimar', 'Cartify'];
   
   for (const brand of commonBrands) {
     if (title.toLowerCase().includes(brand.toLowerCase())) {
@@ -496,14 +496,14 @@ function generatePlaceholderProducts(intent: ParsedIntent): ProductResult[] {
       },
       { 
         id: `mock_3_${now}`, 
-        title: "Amazon Echo Dot 5th Gen Smart Speaker with Alexa", 
+        title: "Cartify Echo Dot 5th Gen Smart Speaker with Alexa", 
         price: 3499, 
         originalPrice: 5499, 
         rating: 4.5, 
         reviewCount: 15672, 
         image: "https://images.unsplash.com/photo-1543512214-318c7505f352?w=400&h=400&fit=crop&auto=format", 
         category: "Gifts", 
-        brand: "Amazon", 
+        brand: "Cartify", 
         prime: true, 
         inStock: true, 
         source: "placeholder" 

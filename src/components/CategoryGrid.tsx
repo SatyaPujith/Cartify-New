@@ -51,7 +51,7 @@ export default function CategoryGrid() {
         return (
           <div key={card.title} className="bg-white rounded-md p-4">
             <h3 className="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2">
-              <Icon className="w-5 h-5 text-amazon-orange" />
+              <Icon className="w-5 h-5 text-cartify-orange" />
               {card.title}
             </h3>
             <div className="grid grid-cols-2 gap-2 mb-3">
@@ -69,7 +69,7 @@ export default function CategoryGrid() {
                       loading="lazy"
                     />
                   </div>
-                  <span className="text-xs text-gray-700 mt-1 text-center group-hover/item:text-amazon-link">
+                  <span className="text-xs text-gray-700 mt-1 text-center group-hover/item:text-cartify-link">
                     {item}
                   </span>
                 </Link>
@@ -77,7 +77,7 @@ export default function CategoryGrid() {
             </div>
             <Link
               to={card.link}
-              className="text-sm text-amazon-link hover:text-amazon-orange hover:underline flex items-center"
+              className="text-sm text-cartify-link hover:text-cartify-orange hover:underline flex items-center"
             >
               See all <ChevronRight className="w-4 h-4" />
             </Link>

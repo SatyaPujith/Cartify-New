@@ -24,7 +24,7 @@ export default function ProductRow({ title, products, seeMoreLink }: ProductRowP
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-xl font-bold text-gray-900">{title}</h2>
         {seeMoreLink && (
-          <a href={seeMoreLink} className="text-sm text-amazon-link hover:text-amazon-orange hover:underline">
+          <a href={seeMoreLink} className="text-sm text-cartify-link hover:text-cartify-orange hover:underline">
             See more
           </a>
         )}

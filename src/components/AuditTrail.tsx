@@ -106,7 +106,7 @@ export default function AuditTrail() {
         className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition-colors"
       >
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-amazon-navy" />
+          <Shield className="w-5 h-5 text-cartify-navy" />
           <h3 className="font-bold text-sm text-gray-900">Audit Trail</h3>
           <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
             {allEntries.length} actions

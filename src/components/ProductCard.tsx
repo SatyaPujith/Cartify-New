@@ -94,7 +94,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <Link to={`/product/${product.id}`} className="flex-1">
-        <h3 className="text-sm text-amazon-link hover:text-amazon-link-hover line-clamp-2 leading-snug">
+        <h3 className="text-sm text-cartify-link hover:text-cartify-link-hover line-clamp-2 leading-snug">
           {product.title}
         </h3>
       </Link>
@@ -106,13 +106,13 @@ export default function ProductCard({ product }: { product: Product }) {
               key={star}
               className={`w-3.5 h-3.5 ${
                 star <= Math.round(product.rating)
-                  ? 'text-amazon-orange fill-amazon-orange'
+                  ? 'text-cartify-orange fill-cartify-orange'
                   : 'text-gray-300'
               }`}
             />
           ))}
         </div>
-        <span className="text-xs text-amazon-link hover:text-amazon-orange hover:underline cursor-pointer">
+        <span className="text-xs text-cartify-link hover:text-cartify-orange hover:underline cursor-pointer">
           {product.reviewCount.toLocaleString('en-IN')}
         </span>
       </div>
@@ -130,14 +130,14 @@ export default function ProductCard({ product }: { product: Product }) {
 
       {product.prime && (
         <div className="mt-1">
-          <span className="text-xs font-bold text-amazon-success">Prime</span>
+          <span className="text-xs font-bold text-cartify-success">Prime</span>
           <span className="text-xs text-gray-600 ml-1">FREE delivery</span>
         </div>
       )}
 
       <button
         onClick={() => addToCart(product)}
-        className="mt-2 bg-amazon-yellow hover:bg-amazon-yellow-hover text-gray-900 text-xs font-bold py-1.5 px-3 rounded-full transition-colors"
+        className="mt-2 bg-cartify-yellow hover:bg-cartify-yellow-hover text-gray-900 text-xs font-bold py-1.5 px-3 rounded-full transition-colors"
       >
         Add to Cart
       </button>
